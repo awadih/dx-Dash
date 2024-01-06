@@ -1,4 +1,5 @@
 import json
+import socket
 import pandas as pd
 import plotly.express as px  # type: ignore
 import plotly.utils  # type: ignore
@@ -62,7 +63,7 @@ def home():
     # Get actual time
     dt = datetime.datetime.now()
     # Get current location as a dictionary (with ip address)
-    location_info = get_location(api_ipgeo_key, request.remote_addr)
+    location_info = get_location(api_ipgeo_key, socket.gethostbyname(socket.gethostname()))
     # Reformat location to render title
     location = f'{location_info["city"]} - {location_info["country"]}'
     # Get full scope weather with weatherapi
@@ -96,7 +97,7 @@ def explore():
         # Get actual time
         dt = datetime.datetime.now()
         # Get current location as a dictionary (with ip address)
-        location_info = get_location(api_ipgeo_key, request.remote_addr)
+        location_info = get_location(api_ipgeo_key, socket.gethostbyname(socket.gethostname()))
         # Get current city of user
         current_city = location_info['city']
         # Get full scope weather with weatherapi
