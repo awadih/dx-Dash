@@ -2,8 +2,6 @@ import datetime
 import requests
 
 from typing import Any, Dict, List, Union, Callable
-
-from flask import request
 from geopy.geocoders import Nominatim  # type: ignore
 from pytz import timezone
 from timezonefinder import TimezoneFinder
@@ -38,7 +36,9 @@ def get_location(ipgeo_key: str) -> dict[str, str]:
         dictionary for 'ip' address, 'city' and 'country' of the user
     """
     try:
-        ip_address = request.remote_addr
+        response_ip = requests.get('https://api.ipify.org?format=json')
+        response_ip.raise_for_status()
+        ip_address = response_ip.json()["ip"]
         try:
             response_location = requests.get(
                 f'https://api.ipgeolocation.io/ipgeo?apiKey={ipgeo_key}&ip={ip_address}&fields=city,country_name')
