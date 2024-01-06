@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}About DX-Dash{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="display-1">DX-Dash App</h1>
+    </div>
+    <div class="row justify-content-center">
+        <p class="lead text-content">A basic serverless app retrieving weather data through APIs.</p>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="lead text-content">I am keen on learning from your coding experience. Please feel free to give me your feedback.</div>
+</div>
+<div class="container py-5" style="max-width: 600px;">
+    <span class="text-muted">Powered by:</span>
+    <div class="container py-3">
+        <a href="https://www.weatherapi.com/"><img class="img-fluid rounded float-left" width="20%" height="20%" src="//cdn.weatherapi.com/v4/images/weatherapi_logo.png" alt=""></a>
+        <a href="https://developers.teleport.org/api/"><img class="img-fluid" width="15%" height="15%" src="../static/img/teleport_logo.png" alt=""></a>
+        <a href="https://developers.google.com/maps"><img class="img-fluid rounded float-right" width="15%" height="15%"  src="../static/img/google_maps_logo.png" alt=""></a>
+    </div>
+</div>
+<div class="container py-5">
+    <span class="text-muted">Credits for:</span>
+    <div class="container py-3">
+        <a href="https://icons8.com">Icons by Icons8</a>
+    </div>
+</div>
+{% endblock %}
