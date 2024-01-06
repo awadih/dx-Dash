@@ -2,6 +2,8 @@ import datetime
 import requests
 
 from typing import Any, Dict, List, Union, Callable
+
+from flask import jsonify, request
 from geopy.geocoders import Nominatim  # type: ignore
 from pytz import timezone
 from timezonefinder import TimezoneFinder
@@ -26,36 +28,31 @@ def get_days(time: datetime.datetime) -> tuple[str, str]:
         return WEEKDAYS[0], WEEKDAYS[1]
 
 
-def get_location(ipgeo_key: str) -> dict[str, str]:
+def get_location(ipgeo_key: str, ip_address: str) -> dict[str, str]:
     """Get the user location using the ip address through the IPGeolocation API
 
     Args:
+        ip_address: string for ip address of user
         ipgeo_key: string for IPGeolocation API key
 
     Returns:
         dictionary for 'ip' address, 'city' and 'country' of the user
     """
     try:
-        response_ip = requests.get('https://api.ipify.org?format=json')
-        response_ip.raise_for_status()
-        ip_address = response_ip.json()["ip"]
-        try:
-            response_location = requests.get(
-                f'https://api.ipgeolocation.io/ipgeo?apiKey={ipgeo_key}&ip={ip_address}&fields=city,country_name')
-            response_location.raise_for_status()
-            response = response_location.json()
-            location_data = {
-                "ip": str(response.get("ip")),
-                "city": str(response.get("city")),
-                "country": str(response.get("country_name"))
-            }
-            return location_data
-        except requests.exceptions.RequestException as e:
-            return {}
-        finally:
-            pass
+        response_location = requests.get(
+            f'https://api.ipgeolocation.io/ipgeo?apiKey={ipgeo_key}&ip={ip_address}&fields=city,country_name')
+        response_location.raise_for_status()
+        response = response_location.json()
+        location_data = {
+            "ip": str(response.get("ip")),
+            "city": str(response.get("city")),
+            "country": str(response.get("country_name"))
+        }
+        return location_data
     except requests.exceptions.RequestException as e:
         return {}
+    finally:
+        pass
 
 
 def get_weather(weatherapi_key: str, city: str) -> dict[str, Any]:

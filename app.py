@@ -56,13 +56,13 @@ def contact():
     return render_template('index.html')
 
 
-@app.route('/home')
+@app.route('/home', methods=["GET"])
 def home():
     """Renders the home page for current location at local time"""
     # Get actual time
     dt = datetime.datetime.now()
     # Get current location as a dictionary (with ip address)
-    location_info = get_location(api_ipgeo_key)
+    location_info = get_location(api_ipgeo_key, request.remote_addr)
     # Reformat location to render title
     location = f'{location_info["city"]} - {location_info["country"]}'
     # Get full scope weather with weatherapi
@@ -96,7 +96,7 @@ def explore():
         # Get actual time
         dt = datetime.datetime.now()
         # Get current location as a dictionary (with ip address)
-        location_info = get_location(api_ipgeo_key)
+        location_info = get_location(api_ipgeo_key, request.remote_addr)
         # Get current city of user
         current_city = location_info['city']
         # Get full scope weather with weatherapi
