@@ -36,7 +36,7 @@ def get_location(ipgeo_key: str) -> dict[str, str]:
         dictionary for 'ip' address, 'city' and 'country' of the user
     """
     try:
-        response_ip = requests.get('https://api64.ipify.org?format=json')
+        response_ip = requests.get('https://api.ipify.org?format=json')
         response_ip.raise_for_status()
         ip_address = response_ip.json()["ip"]
         try:
