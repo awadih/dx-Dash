@@ -16,6 +16,7 @@ api_google_key = os.getenv("API_GOOGLE_KEY")
 api_weatherapi_key = os.getenv("API_WEATHERAPI_KEY")
 mail_password = os.getenv("MAIL_PASSWORD")
 mail_username = os.getenv("MAIL_USERNAME")
+ip_api_key = os.getenv("IP_API_KEY")
 
 app = Flask(__name__, template_folder='templates')
 app.config["SECRET_KEY"] = os.getenv("API_SECRET")
@@ -47,23 +48,26 @@ def contact():
         msg = Message("Contact Form from DX-Dash",
                       sender=request.form.get('name'),
                       recipients=["dx-dash@mailtrap.io"])
-        msg.body = """
-            From: {} <{}>
-            To: DX-Dash <dx-dash@mailtrap.io>
-            Subject: New contact for DX-Dash
-            {}
-            """.format(request.form.get('name'), request.form.get('email'), request.form.get('message'))
+        msg.body = """From: {} <{}>
+        To: DX-Dash <dx-dash@mailtrap.io>
+        Subject: New contact for DX-Dash
+        {}""".format(request.form.get('name'), request.form.get('email'), request.form.get('message'))
         mail.send(msg)
     return render_template('index.html')
 
 
-@app.route('/home', methods=["GET"])
+@app.route('/home', methods=["GET", "POST"])
 def home():
     """Renders the home page for current location at local time"""
     # Get actual time
     dt = datetime.datetime.now()
-    # Get current location as a dictionary (with ip address)
-    location_info = get_location(api_ipgeo_key)
+
+    # Get location from ip address
+    location_info = get_location_from_ip(ip_api_key)
+
+    # Get current location as a dictionary
+    # location_info = get_location('50.937531', '6.960279')
+
     # Reformat location to render title
     location = f'{location_info["city"]} - {location_info["country"]}'
     # Get full scope weather with weatherapi
@@ -96,8 +100,11 @@ def explore():
     if request.method == 'POST' and request.form['search'] == 'search':
         # Get actual time
         dt = datetime.datetime.now()
-        # Get current location as a dictionary (with ip address)
-        location_info = get_location(api_ipgeo_key)
+        # Get current location as a dictionary
+        #location_info = get_location('50.937531', '6.960279')
+
+        location_info = get_location_from_ip(ip_api_key)
+
         # Get current city of user
         current_city = location_info['city']
         # Get full scope weather with weatherapi

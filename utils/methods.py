@@ -30,29 +30,29 @@ def get_days(time: datetime.datetime) -> tuple[str, str]:
         return WEEKDAYS[0], WEEKDAYS[1]
 
 
-def get_location(ipgeo_key: str) -> dict[str, str]:
+def get_location_from_ip(api_key):
+    response = requests.get(f'https://ipapi.co/json/?key={api_key}').json()
+    location_data = {
+        "city": response.get("city"),
+        "region": response.get("region"),
+        "country": response.get("country_name")
+    }
+    return location_data
+
+
+def get_location(latitude: str, longitude: str) -> dict[str, str]:
     """Get the user location using the ip address through the IPGeolocation API
 
     Args:
-        ipgeo_key: string for IPGeolocation API key
+        latitude: string for latitude
+        longitude: string for longitude
 
     Returns:
-        dictionary for 'ip' address, 'city' and 'country' of the user
+        dictionary for 'city' and 'country' of the user
     """
-    try:
-        response_location = requests.get(f'https://ipgeolocation.abstractapi.com/v1/?api_key={ipgeo_key}')
-        response_location.raise_for_status()
-        response = response_location.json()
-        location_data = {
-            "ip": str(response.get("ip_address")),
-            "city": str(response.get("city")),
-            "country": str(response.get("country"))
-        }
-        return location_data
-    except requests.exceptions.RequestException as e:
-        return {}
-    finally:
-        pass
+    geolocator = Nominatim(user_agent="app")
+    location = geolocator.reverse(latitude + "," + longitude)
+    return {'city': location.raw['address']['city'], 'country': location.raw['address']['country']}
 
 
 def get_weather(weatherapi_key: str, city: str) -> dict[str, Any]:

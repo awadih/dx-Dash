@@ -2,6 +2,11 @@
 
 {% block title %}My Forecast{% endblock %}
 
+{% block head%}
+    {{ super() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{% endblock %}
+
 {% block alert %}
     <!-- ALERT MODAL -->
     {% if alerts is defined and alerts[0]|length > 0 %}
@@ -240,7 +245,21 @@
     $('#year').text(date.getFullYear());
     // FORMATTED DATE
     $('#date').text(date.toString().slice(0, 16));
-    // SHOW ALERT MODAL
-    $('#alertModal').modal('show');
+</script>
+<script>
+    const successCallback = (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const coordinates = {latitude, longitude};
+        console.log('lat.:', coordinates.latitude)
+        console.log('long.:', coordinates.longitude)
+    };
+    const errorCallback = (error) => {
+        console.log(error);
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("page is fully loaded");
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    });
 </script>
 {% endblock %}
