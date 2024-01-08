@@ -14,3 +14,25 @@
     </div>
 </div>
 {% endblock %}
+
+{% block script %}
+    <script>
+        window.onload = navigator.geolocation.getCurrentPosition(success, error);
+
+        function success(pos) {
+            const crd = pos.coords;
+            console.log("Your current position is:");
+            console.log(`Latitude : ${crd.latitude}`);
+            console.log(`Longitude: ${crd.longitude}`);
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('get_location') }}",
+                data: {"Latitude": crd.latitude, "Longitude": crd.longitude}
+            });
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+    </script>
+{% endblock %}

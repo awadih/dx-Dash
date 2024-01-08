@@ -1,14 +1,13 @@
-import json
-import socket
 import pandas as pd
 import plotly.express as px  # type: ignore
 import plotly.utils  # type: ignore
 import os
 
 from utils.methods import *  # type: ignore
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, session
 from flask_mail import Mail, Message  # type: ignore
 from dotenv import load_dotenv
+from geopy.geocoders import Nominatim
 
 load_dotenv()
 api_ipgeo_key = os.getenv("API_IPGEO_KEY")
@@ -26,6 +25,7 @@ app.config['MAIL_USERNAME'] = mail_username
 app.config['MAIL_PASSWORD'] = mail_password
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
+
 mail = Mail(app)
 
 
@@ -56,18 +56,28 @@ def contact():
     return render_template('index.html')
 
 
-@app.route('/home', methods=["GET", "POST"])
+@app.route('/get_location', methods=['POST'])
+def get_location():
+    if request.method == 'POST':
+        geolocator = Nominatim(user_agent="app")
+        latitude = request.values.get('Latitude')
+        longitude = request.values.get('Longitude')
+        location = geolocator.reverse(latitude + "," + longitude, language='en')
+        session['location'] = location.raw['address']
+        print("result:", session['location'])
+        return '', 204
+
+
+@app.route('/home', methods=["GET"])
 def home():
     """Renders the home page for current location at local time"""
     # Get actual time
     dt = datetime.datetime.now()
-
     # Get location from ip address
-    location_info = get_location_from_ip(ip_api_key)
-
-    # Get current location as a dictionary
-    # location_info = get_location('50.937531', '6.960279')
-
+    location_info = {}
+    if 'location' in session:
+        location_info['city'] = session['location']['city']
+        location_info['country'] = session['location']['country']
     # Reformat location to render title
     location = f'{location_info["city"]} - {location_info["country"]}'
     # Get full scope weather with weatherapi
@@ -101,7 +111,7 @@ def explore():
         # Get actual time
         dt = datetime.datetime.now()
         # Get current location as a dictionary
-        #location_info = get_location('50.937531', '6.960279')
+        # location_info = get_location('50.937531', '6.960279')
 
         location_info = get_location_from_ip(ip_api_key)
 
