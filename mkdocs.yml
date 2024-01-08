@@ -1,0 +1,17 @@
+site_name: weather-dash
+site_url: https://dx-dash.onrender.com/
+nav:
+  - 'Home': 'index.md'
+  - 'Research':
+    - 'Current location': 'research/1.current_location.md'
+    - 'Current weather': 'research/2.current_weather_data.md'
+    - 'Alerts': 'research/3.alerts.md'
+    - 'API limitation': 'research/4.api_limitations.md'
+  - 'Prototyping':
+      - 'Wireframe': 'prototyping/1.tools.md'
+  - 'Tasks': 'TODO.md'
+  - 'License': 'license.md'
+theme: readthedocs
+markdown_extensions:
+  - pymdownx.tasklist:
+      custom_checkbox: true
