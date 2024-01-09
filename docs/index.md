@@ -1,13 +1,15 @@
-This documentation should help understand the API-responses, so that a better use of it for the dash-app would be easier.
+This documentation should help understand the API request/response, so that an optimal usage of the weatherapi free version is implemented within dx-Dash App.
 
-Steps: <br />
-- [x] Planning and Research <br />
-- [ ] Prototyping <br />
-  - Wireframing-tool: Inkscape
-- [ ] Design <br />
-- [ ] Development <br />
-- [ ] Testing <br />
-- [ ] Release <br />
-- [ ] Maintenance
+Steps:
+
+~~~~
+1. Planning and Research
+2. Prototyping: Inkscape as a wireframing-tool
+3. Design
+4. Development
+5. Testing
+6. Release
+7. Maintenance
+~~~~
 
 
