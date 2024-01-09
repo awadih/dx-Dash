@@ -1,7 +1,11 @@
 theme:
-  name: material
+  name: readthedocs
+  highlightjs: true
   logo: assets/logo.png
   favicon: assets/favicon.ico
+  hljs_languages:
+    - yaml
+    - rust
 site_name: weather-dash
 site_url: https://dx-dash.onrender.com/
 nav:
