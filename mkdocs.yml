@@ -1,24 +1,32 @@
+site_name: dx-Dash
+site_url: https://awadih.github.io/dx-Dash/
+site_author: A. Wadih
+site_description: "dx-Dash App documentation & further features"
+repo_url: "https://github.com/awadih/dx-Dash"
+copyright: "dx-Dash is licensed under the <a href='https://github.com/awadih/dx-Dash/blob/main/LICENSE.md'>MIT license</a>"
 theme:
-  name: readthedocs
+  name: null
+  custom_dir: 'cinder'
+  colorscheme: github
   highlightjs: true
-  logo: assets/logo.png
-  favicon: assets/favicon.ico
   hljs_languages:
     - yaml
-    - rust
-site_name: weather-dash
-site_url: https://dx-dash.onrender.com/
+    - python
+  favicon: img/favicon.ico
 nav:
-  - 'Home': 'index.md'
-  - 'Research':
+  - 'Home':
+    - 'Overview': 'index.md'
     - 'Current location': 'research/1.current_location.md'
     - 'Current weather': 'research/2.current_weather_data.md'
     - 'Alerts': 'research/3.alerts.md'
     - 'API limitation': 'research/4.api_limitations.md'
-  - 'Prototyping':
+  - 'Prototyping & Design':
       - 'Wireframe': 'prototyping/1.tools.md'
-  - 'Tasks': 'TODO.md'
+      - 'UI': 'design/user_interface.md'
+  - 'Development':
+      - 'Dev-Framework': 'development/dev_framework.md'
+      - 'Tasks': 'todos.md'
+  - 'Testing & Deployment':
+      - 'Testing-Framework': 'testing/test_framework.md'
+      - 'Hosting platform': 'deployment/hosting_platform.md'
   - 'License': 'license.md'
-markdown_extensions:
-  - pymdownx.tasklist:
-      custom_checkbox: true
