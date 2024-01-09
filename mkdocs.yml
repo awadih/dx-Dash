@@ -1,3 +1,7 @@
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.ico
 site_name: weather-dash
 site_url: https://dx-dash.onrender.com/
 nav:
@@ -11,7 +15,6 @@ nav:
       - 'Wireframe': 'prototyping/1.tools.md'
   - 'Tasks': 'TODO.md'
   - 'License': 'license.md'
-theme: readthedocs
 markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
