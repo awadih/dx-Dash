@@ -78,6 +78,8 @@ def home():
     if 'location' in session:
         location_info['city'] = session['location']['city']
         location_info['country'] = session['location']['country']
+    else:
+        return render_template('info.html')
     # Reformat location to render title
     location = f'{location_info["city"]} - {location_info["country"]}'
     # Get full scope weather with weatherapi

@@ -24,6 +24,7 @@
             console.log("Your current position is:");
             console.log(`Latitude : ${crd.latitude}`);
             console.log(`Longitude: ${crd.longitude}`);
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "{{ url_for('get_location') }}",
