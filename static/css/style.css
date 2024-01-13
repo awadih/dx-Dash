@@ -3,7 +3,7 @@ body {
   overflow: scroll;
   height: auto;
   background-size: cover;
-  background: url('../img/background.jpg') no-repeat fixed;
+  background: url('../img/background.avif') no-repeat fixed;
   position: relative;
   min-height: 100vh;
 }
