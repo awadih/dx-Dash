@@ -16,15 +16,17 @@ theme:
 nav:
   - 'Home':
     - 'Overview': 'index.md'
-    - 'Current location': 'research/1.current_location.md'
-    - 'Current weather': 'research/2.current_weather_data.md'
-    - 'Alerts': 'research/3.alerts.md'
-    - 'API limitation': 'research/4.api_limitations.md'
+    - 'Google Maps API': 'research/google_maps_api.md'
+    - 'Teleport API': 'research/teleport_api.md'
+    - 'Weather API & limitations': 'research/api_limitations.md'
   - 'Prototyping & Design':
       - 'Wireframe': 'prototyping/1.tools.md'
       - 'UI': 'design/user_interface.md'
   - 'Development':
       - 'Dev-Framework': 'development/dev_framework.md'
+      - 'Current location': 'research/1.current_location.md'
+      - 'Current weather': 'research/2.current_weather_data.md'
+      - 'Alerts': 'research/3.alerts.md'
       - 'Tasks': 'todos.md'
   - 'Testing & Deployment':
       - 'Testing-Framework': 'testing/test_framework.md'
