@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 
+{% block head%}
+    {{ super() }}
+    <style>
+    body{color:#333;overflow:scroll;height:auto;background-size:cover;background:url('../img/background.avif') no-repeat fixed;position:relative;min-height:100vh}{% endblock %}
+    </style>
 {% block title %}DX-Dash{% endblock %}
 
 {% block content %}
