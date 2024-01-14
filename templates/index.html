@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block script %}
-    <script>
+    <script async>
         window.onload = navigator.geolocation.getCurrentPosition(success, error);
 
         function success(pos) {
