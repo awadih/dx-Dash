@@ -23,7 +23,7 @@ fig = px.scatter(df, x="x", y="y", render_mode='webgl')
 > Minimize number of calls in the dash-app
 
 `TODO: current location`
-> Current location through IP address see [page](../research/1.current_location.md).
+> Current location through IP address see [page](1.current_location.md).
 
 `Requirements:`
 > Update for dash components each 15 minutes, as the actual weather data is updated each 15 Minutes. <br />

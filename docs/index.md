@@ -1,6 +1,6 @@
-<img src="/img/logo.png" alt="dx-Dash logo" width="100"/>
+<img src="./img/logo.png" alt="dx-Dash logo" width="100"/>
 
-**dx-Dash** is a basic serverless application retrieving weather data through API calls.
+**dx-Dash** is a basic serverless application retrieving weather data through [Weather-API](https://www.weatherapi.com/) calls.
 
 Media used by the application such as maps, photos and icons has been collected through 
 [Google Maps](https://developers.google.com/maps) and [Teleport](https://developers.teleport.org/api/) API calls as well
