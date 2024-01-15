@@ -121,6 +121,31 @@ As a Json response the API gives the following:
 A link to the photo can be then retrieved:
 [Paris](https://d13k13wj6adfdf.cloudfront.net/urban_areas/paris_web-0a3c7314a5.jpg).
 
+## Summary for city
+
+A summary for each urban area can be retrieved with HTTP request:
+
+```BASH
+### search timezone
+GET https://api.teleport.org/api/urban_areas/slug:cologne/scores/
+```
+
+A response sees like the following:
+```JSON
+...
+    "score_out_of_10": 5.289000000000001
+    }
+  ],
+    "summary": "<p>Cologne, Germany, is among the top cities with a <b>free business environment</b>.\n\n    \n        According to our city rankings, this is a good place to live with high ratings in <b>travel connectivity</b>, <b>safety</b> and <b>healthcare</b>.\n    \n\n    \n</p>\n\n",
+    "teleport_city_score": 62.26432432432431
+}
+```
+
+The summary can be added to HTML as follows, where *summary* is the variable holding the summary:
+
+```HTML
+<p class="lead m-1">{{ summary | safe }}</p>
+```
 
 ## Costs
 
