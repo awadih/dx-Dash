@@ -1,5 +1,20 @@
 # API free plan limitations
 
+## Sample HTTP request
+
+An example of extensive HTTP request to retrieve the maximum data is given as follow:
+
+```BASH
+GET https://api.weatherapi.com/v1/forecast.json?key=API_KEY&q=berlin&alerts=yes&aqi=yes
+Content-Type: application/json
+```
+
+The response gives for berlin:
+
+1. location: latitude, longitude, timezone, current time, ...etc.
+2. weather data for 3 days: weather condition, weather icon for each hour, ... etc.
+3. weather alerts if any.
+
 ## Free plan features 
 
 The API free of charge plan allows the following:<br />
