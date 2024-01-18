@@ -113,10 +113,12 @@ def explore():
         # Get actual time
         dt = datetime.datetime.now()
         # Get current location as a dictionary
-        # location_info = get_location('50.937531', '6.960279')
-
-        location_info = get_location_from_ip(ip_api_key)
-
+        location_info = {}
+        if 'location' in session:
+            location_info['city'] = session['location']['city']
+            location_info['country'] = session['location']['country']
+        else:
+            return render_template('info.html')
         # Get current city of user
         current_city = location_info['city']
         # Get full scope weather with weatherapi

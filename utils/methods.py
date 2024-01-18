@@ -9,9 +9,10 @@ from flask import jsonify, request
 from geopy.geocoders import Nominatim  # type: ignore
 from pytz import timezone
 from timezonefinder import TimezoneFinder
+from models import *
 
 
-def get_days(time: datetime.datetime) -> tuple[str, str]:
+def get_days(time: datetime) -> tuple[str, str]:
     """As the weather API allows retrieving for free only 3 days forecast, gets the next 3 days of weekdays
 
     Args:
@@ -30,32 +31,7 @@ def get_days(time: datetime.datetime) -> tuple[str, str]:
         return WEEKDAYS[0], WEEKDAYS[1]
 
 
-def get_location_from_ip(api_key):
-    response = requests.get(f'https://ipapi.co/json/?key={api_key}').json()
-    location_data = {
-        "city": response.get("city"),
-        "region": response.get("region"),
-        "country": response.get("country_name")
-    }
-    return location_data
-
-
-def get_location(latitude: str, longitude: str) -> dict[str, str]:
-    """Get the user location using the ip address through the IPGeolocation API
-
-    Args:
-        latitude: string for latitude
-        longitude: string for longitude
-
-    Returns:
-        dictionary for 'city' and 'country' of the user
-    """
-    geolocator = Nominatim(user_agent="app")
-    location = geolocator.reverse(latitude + "," + longitude)
-    return {'city': location.raw['address']['city'], 'country': location.raw['address']['country']}
-
-
-def get_weather(weatherapi_key: str, city: str) -> dict[str, Any]:
+def get_weather(weatherapi_key: str, city: str) -> list[ForecastHour]:
     """Gets the weatherapi response as json - names 'weather' in the code
 
     Args:
@@ -67,17 +43,21 @@ def get_weather(weatherapi_key: str, city: str) -> dict[str, Any]:
     """
     # Weatherapi API
     try:
+        forecast_hour_list = list()
         response = requests.get(
             f'https://api.weatherapi.com/v1/forecast.json?key={weatherapi_key}&q={city}&days=3&alerts=yes&aqi=yes')
         response.raise_for_status()
-        return response.json()
+        for day in range(3):
+            for hour in range(24):
+                forecast_hour_list.append(ForecastHour(**response.json()['forecast']['forecastday'][day]['hour'][hour]))
+        return forecast_hour_list
     except requests.exceptions.RequestException as e:
-        return {}
+        return list()
     finally:
         pass
 
 
-def forecast_days(time: datetime.datetime, weather: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
+def forecast_days(time: datetime, weather: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
     """Forecast temperatures and retrieve weather icons for 3 days
 
     Args:
@@ -111,7 +91,7 @@ def forecast_params(weather: Dict[str, Any]) -> Dict[str, str]:
     return {'HUMIDITY': f'{humidity}%', 'PRESSURE': f'{pressure} hPa', 'WIND SPEED': f'{wind_speed} kmph'}
 
 
-def forecast_hours(time: datetime.datetime, weather: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
+def forecast_hours(time: datetime, weather: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
     """Get the weather forecast for next 24 hours
 
     Args:
