@@ -4,7 +4,7 @@ import plotly.utils  # type: ignore
 import os
 
 from utils.methods import *  # type: ignore
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, json
 from flask_mail import Mail, Message  # type: ignore
 from dotenv import load_dotenv
 from geopy.geocoders import Nominatim
@@ -16,6 +16,7 @@ api_weatherapi_key = os.getenv("API_WEATHERAPI_KEY")
 mail_password = os.getenv("MAIL_PASSWORD")
 mail_username = os.getenv("MAIL_USERNAME")
 ip_api_key = os.getenv("IP_API_KEY")
+api_key_unsplash = os.getenv("API_KEY_UNSPLASH")
 
 app = Flask(__name__, template_folder='templates')
 app.config["SECRET_KEY"] = os.getenv("API_SECRET")
@@ -99,8 +100,7 @@ def home():
     # Get embedded map link
     map_link = get_map_link(api_google_key, location_info['city'])
     # Get summary for city through teleport api
-    summary = get_summary(location_info['city'].lower())
-    return render_template("home.html", air_q_index=quality[2], air_q_desc=quality[3], summary=summary,
+    return render_template("home.html", air_q_index=quality[2], air_q_desc=quality[3],
                            temp=quality[0], feels=quality[1], map_link=map_link, sunrise=sunrise, sunset=sunset,
                            location=location, weather_hours=weather_hours, weather_days=weather_days,
                            params=params, alerts=[alerts[0], alerts[1], alerts[2]], modal=modal)
@@ -113,10 +113,12 @@ def explore():
         # Get actual time
         dt = datetime.datetime.now()
         # Get current location as a dictionary
-        # location_info = get_location('50.937531', '6.960279')
-
-        location_info = get_location_from_ip(ip_api_key)
-
+        location_info = {}
+        if 'location' in session:
+            location_info['city'] = session['location']['city']
+            location_info['country'] = session['location']['country']
+        else:
+            return render_template('info.html')
         # Get current city of user
         current_city = location_info['city']
         # Get full scope weather with weatherapi
@@ -138,9 +140,7 @@ def explore():
         # Get alerts if any (modal as flag; if true, alerts are found)
         modal, alerts = get_alerts(weather)
         # Get embedded map link
-        map_link, flag = get_src(api_google_key, request.form['city'].split(', ')[0].lower())
-        # Get summary for city through teleport api
-        summary = get_summary(request.form['city'].split(', ')[0].lower())
+        map_link, flag = get_src(api_google_key, api_key_unsplash, request.form['city'].split(', ')[0].lower())
         # ------------ PLOTS ------------ #
         # Get weather for hours as dataframe
         df = pd.DataFrame.from_dict(weather_hours)
@@ -184,7 +184,7 @@ def explore():
         graph1json = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
         graph2json = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
         return render_template('explore.html', air_q_index=quality[2], air_q_desc=quality[3], temp=quality[0],
-                               feels=quality[1], sunrise=sunrise, sunset=sunset, summary=summary,
+                               feels=quality[1], sunrise=sunrise, sunset=sunset,
                                location=request.form['city'], flag=flag,
                                map_link=map_link, weather_hours=weather_hours, weather_days=weather_days,
                                params=params, alerts=[alerts[0], alerts[1], alerts[2]], modal=modal,

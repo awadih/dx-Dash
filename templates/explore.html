@@ -75,16 +75,6 @@
                     <div class="row justify-content-center m-1">
                         <div class="lead"><strong>{{ location }}</strong></div>
                     </div>
-                    <div class="row m-1">
-                        {% if summary is defined and summary|length > 0 %}
-                        <blockquote class="blockquote text-left">
-                            <p class="lead">{{ summary | safe }}</p>
-                            <footer class="blockquote-footer text-right">Source:
-                                <cite title="Source Title">Teleport API</cite>
-                            </footer>
-                        </blockquote>
-                        {% endif %}
-                    </div>
                 </div>
             </div>
             {% endif %}
@@ -277,17 +267,17 @@
 
 {% endblock %}
 {% block script %}
-<script>
-    // GET CURRENT DATE
-    let date = new Date();
-    // GET YEAR
-    $('#year').text(date.getFullYear());
-    // FORMATTED DATE
-    $('#date').text(date.toString().slice(0, 16));
-    // GRAPHS FOR TEMPERATURE AND HUMIDITY //
-    var graph1 = {{ graph1json | safe}};
-    Plotly.plot("chart1", graph1, {});
-    var graph2 = {{ graph2json | safe}};
-    Plotly.plot("chart2", graph2, {});
-</script>
+    <script>
+        // GET CURRENT DATE
+        let date = new Date();
+        // GET YEAR
+        $('#year').text(date.getFullYear());
+        // FORMATTED DATE
+        $('#date').text(date.toString().slice(0, 16));
+        // GRAPHS FOR TEMPERATURE AND HUMIDITY //
+        var graph1 = {{ graph1json | safe}};
+        Plotly.plot("chart1", graph1, {});
+        var graph2 = {{ graph2json | safe}};
+        Plotly.plot("chart2", graph2, {});
+    </script>
 {% endblock %}
