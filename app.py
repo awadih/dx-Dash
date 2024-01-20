@@ -2,9 +2,10 @@ import pandas as pd
 import plotly.express as px  # type: ignore
 import plotly.utils  # type: ignore
 import os
+import json
 
 from utils.methods import *  # type: ignore
-from flask import Flask, render_template, request, session, json
+from flask import Flask, render_template, request, session
 from flask_mail import Mail, Message  # type: ignore
 from dotenv import load_dotenv
 from geopy.geocoders import Nominatim
@@ -65,7 +66,7 @@ def get_location():
         longitude = request.values.get('Longitude')
         location = geolocator.reverse(latitude + "," + longitude, language='en')
         session['location'] = location.raw['address']
-        print("result:", session['location'])
+        # print("result:", session['location'])
         return '', 204
 
 
