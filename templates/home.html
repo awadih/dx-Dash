@@ -50,25 +50,6 @@
         </div>
     </div>
 
-    <div class="container">
-        <!-- SUMMARY -->
-        <div class="card mb-1 py-2">
-            <div class="card-header top-header">
-                OVERVIEW
-            </div>
-            <div class="body-card">
-                {% if summary is defined and summary|length > 0 %}
-                <blockquote class="blockquote text-left">
-                    <p class="lead m-1">{{ summary | safe }}</p>
-                    <footer class="blockquote-footer text-right">Source:
-                        <cite title="Source Title">Teleport API</cite>
-                    </footer>
-                </blockquote>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
     <!-- SUNRISE / FEELS LIKE / SUNSET  -->
     <div class="container">
         <div class="row">
@@ -244,7 +225,7 @@
 {% endblock %}
 
 {% block script %}
-<script async>
+<script>
     // GET CURRENT DATE
     let date = new Date();
     // GET YEAR
@@ -252,7 +233,7 @@
     // FORMATTED DATE
     $('#date').text(date.toString().slice(0, 16));
 </script>
-<script async>
+<script>
     const successCallback = (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;

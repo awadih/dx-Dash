@@ -1,11 +1,7 @@
 import datetime
-import json
-
 import requests
 
-from typing import Any, Dict, List, Union, Callable
-
-from flask import jsonify, request
+from typing import Any, Dict, List
 from geopy.geocoders import Nominatim  # type: ignore
 from pytz import timezone
 from timezonefinder import TimezoneFinder
@@ -28,16 +24,6 @@ def get_days(time: datetime.datetime) -> tuple[str, str]:
         return WEEKDAYS[6], WEEKDAYS[0]
     else:
         return WEEKDAYS[0], WEEKDAYS[1]
-
-
-def get_location_from_ip(api_key):
-    response = requests.get(f'https://ipapi.co/json/?key={api_key}').json()
-    location_data = {
-        "city": response.get("city"),
-        "region": response.get("region"),
-        "country": response.get("country_name")
-    }
-    return location_data
 
 
 def get_location(latitude: str, longitude: str) -> dict[str, str]:
@@ -178,11 +164,12 @@ def get_alerts(weather: Dict[str, Any]) -> tuple[bool, List[str]]:
     return False, ['', '', '']
 
 
-def get_src(googleapi_key: str, city: str) -> tuple[str, bool]:
-    """Get source link for image or google map using teleport api / Google Maps api
+def get_src(googleapi_key: str, api_key_unsplash: str, city: str) -> tuple[str, bool]:
+    """Get source link for image or google map using Unsplash api / Google Maps api
 
     Args:
         googleapi_key: Google Maps API Key as string
+        api_key_unsplash: Unsplash API Key
         city: location as string
 
     Returns:
@@ -191,10 +178,10 @@ def get_src(googleapi_key: str, city: str) -> tuple[str, bool]:
     # TELEPORT API
     try:
         city = city.replace(" ", "-")
-        response = requests.get(f'https://api.teleport.org/api/urban_areas/slug:{city}/images/')
+        response = requests.get(f'https://api.unsplash.com/search/photos?client_id={api_key_unsplash}&query={city}')
         response.raise_for_status()
         if response.status_code != 204:
-            return response.json()['photos'][0]['image']['mobile'], True
+            return response.json()['results'][0]['urls']['raw'], True
         else:
             # Google Maps API
             return get_map_link(googleapi_key, city), False
@@ -218,25 +205,6 @@ def get_timezone(city):  # type: ignore
     obj = TimezoneFinder()
     time_zone = timezone(obj.timezone_at(lng=place_details[1][1], lat=place_details[1][0]))  # type: ignore
     return time_zone
-
-
-def get_summary(city: str) -> str:
-    """Get a summary about the given city through Teleport API
-
-    Args:
-        city: string for given location
-
-    Returns:
-        A short summary about the given urban location
-    """
-    try:
-        city = city.replace(" ", "-")
-        response = requests.get(f'https://api.teleport.org/api/urban_areas/slug:{city}/scores/')
-        response.raise_for_status()
-        return response.json()['summary']
-    except Exception as e:
-        print(e)
-        return ''
 
 
 def get_quality(weather: Dict[str, Any]) -> List[str]:
