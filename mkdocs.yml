@@ -17,7 +17,7 @@ nav:
   - 'Home':
     - 'Overview': 'index.md'
     - 'Google Maps API': 'research/google_maps_api.md'
-    - 'Teleport API': 'research/teleport_api.md'
+    - 'Unsplash API': 'research/unsplash_api.md'
     - 'Weather API & limitations': 'research/api_limitations.md'
   - 'Prototyping & Design':
       - 'Wireframe': 'prototyping/1.tools.md'

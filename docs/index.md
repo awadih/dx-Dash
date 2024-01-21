@@ -3,7 +3,7 @@
 **dx-Dash** is a basic serverless application retrieving weather data through [Weather-API](https://www.weatherapi.com/) calls.
 
 Media used by the application such as maps, photos and icons has been collected through 
-[Google Maps](https://developers.google.com/maps) and [Teleport](https://developers.teleport.org/api/) API calls as well
+[Google Maps](https://developers.google.com/maps) and [Unsplash](https://unsplash.com/developers) API calls as well
 as from the [Icons8](https://icons8.com/) website.
 
 This documentation is written in the purpose of keeping up with the development workload. Furthermore, it should help 
