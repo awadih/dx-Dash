@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 function display_cities() {
-    const DEV_API_KEY = process.env.DEV_API_KEY
+    const DEV_API_KEY = process.env.DEV_API_KEY;
     var url = new URL(`https://api.dev.me/v1-list-cities?x-api-key=${DEV_API_KEY}`);
     var data = {
         name: input.value,
