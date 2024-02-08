@@ -23,6 +23,7 @@ function display_cities() {
         .then(json => {
             let names = Array()
             let arr = json['list']
+            console.log('arr: ', arr)
             for (const element of arr) {
                 names.push(element['name'] + ", " + element['countryName'])
             }
@@ -31,6 +32,7 @@ function display_cities() {
             myList.innerHTML = "";
             myList.style.visibility = "visible";
             const min = Math.min(names.length, 5)
+            let i;
             for (i = 0; i < min; ++i) {
                 let li = document.createElement('li');
                 li.innerText = names[i];
