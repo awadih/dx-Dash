@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 window.addEventListener("DOMContentLoaded", (event) => {
     // GET FORM INPUT ELEMENT
     const input = document.getElementById("input");
