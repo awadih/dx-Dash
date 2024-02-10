@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 window.addEventListener("DOMContentLoaded", (event) => {
     // GET FORM INPUT ELEMENT
     const input = document.getElementById("input");
@@ -10,7 +8,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 });
 
 function display_cities() {
-    const DEV_API_KEY = process.env.DEV_API_KEY;
+    const DEV_API_KEY = '65c24925b20ea7affe14f468-f503579fa35f';
     var url = new URL(`https://api.dev.me/v1-list-cities?x-api-key=${DEV_API_KEY}`);
     var data = {
         name: input.value,
@@ -29,6 +27,7 @@ function display_cities() {
             myList.innerHTML = "";
             myList.style.visibility = "visible";
             const min = Math.min(names.length, 5)
+            let i;
             for (i = 0; i < min; ++i) {
                 let li = document.createElement('li');
                 li.innerText = names[i];
