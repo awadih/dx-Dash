@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="dx-Dash App documentation & further features">
+    <meta name="author" content="A. Wadih">
+    <link rel="canonical" href="https://awadih.github.io/dx-Dash/research/unsplash_api/">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>Unsplash API - dx-Dash</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder_.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../..">dx-Dash</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../..">Overview</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../google_maps_api/">Google Maps API</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Unsplash API</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../api_limitations/">Weather API & limitations</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Prototyping & Design <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../prototyping/1.tools/">Wireframe</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../design/user_interface/">UI</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Development <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../development/dev_framework/">Dev-Framework</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../1.current_location.md">Current location</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../2.current_weather_data.md">Current weather</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../3.alerts.md">Alerts</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../todos.md">Tasks</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Testing & Deployment <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../testing/test_framework/">Testing-Framework</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../deployment/hosting_platform/">Hosting platform</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../license/">License</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../google_maps_api/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../api_limitations/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/awadih/dx-Dash/edit/master/docs/research/unsplash_api.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#teleport-api">Teleport API</a></li>
+            <li class="second-level"><a href="#search-image-with-city-name">Search image with city name</a></li>
+                
+            <li class="second-level"><a href="#costs">Costs</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="teleport-api">Teleport API</h1>
+<p>Unsplash API offers an outstanding dataset of images. A random photo in the urban area can be accessed with HTTP request.</p>
+<h2 id="search-image-with-city-name">Search image with city name</h2>
+<p>We can find an imgae in the city with the city name using the following HTTP request:</p>
+<pre><code class="language-BASH">### Photo in city
+GET https://api.unsplash.com/search/photos?client_id=API_KEY&amp;query=CITY_NAME
+Content-Type: application/json
+</code></pre>
+<p>As a result:</p>
+<pre><code class="language-JSON">&quot;total&quot;: 523,
+&quot;total_pages&quot;: 53,
+&quot;results&quot;: [
+    {
+    &quot;id&quot;: &quot;18fvXEV1R_A&quot;,
+    &quot;slug&quot;: &quot;brown-concrete-building-under-blue-sky-during-daytime-18fvXEV1R_A&quot;,
+    &quot;created_at&quot;: &quot;2020-02-11T18:08:27Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-01-21T05:14:18Z&quot;,
+    &quot;promoted_at&quot;: null,
+    &quot;width&quot;: 3968,
+    &quot;height&quot;: 2976,
+    &quot;color&quot;: &quot;#d9d9f3&quot;,
+    &quot;blur_hash&quot;: &quot;LkMtR7t6krof%%j[jsofI9a|nhjY&quot;,
+    &quot;description&quot;: &quot; Hassan II Mosque in Casablanca, Morocco&quot;,
+    &quot;alt_description&quot;: &quot;brown concrete building under blue sky during daytime&quot;,
+    &quot;breadcrumbs&quot;: [],
+    &quot;urls&quot;: {
+        &quot;raw&quot;: &quot;https://images.unsplash.com/photo-1581443459255-e895f2a4222f?ixid=M3w1NTQ4Mjl8MHwxfHNlYXJjaHwxfHxjYXNhYmxhbmNhfGVufDB8fHx8MTcwNTgzNTM4Nnww&amp;ixlib=rb-4.0.3&quot;,
+        &quot;full&quot;: &quot;https://images.unsplash.com/photo-1581443459255-e895f2a4222f?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3w1NTQ4Mjl8MHwxfHNlYXJjaHwxfHxjYXNhYmxhbmNhfGVufDB8fHx8MTcwNTgzNTM4Nnww&amp;ixlib=rb-4.0.3&amp;q=85&quot;,
+        &quot;regular&quot;: &quot;https://images.unsplash.com/photo-1581443459255-e895f2a4222f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w1NTQ4Mjl8MHwxfHNlYXJjaHwxfHxjYXNhYmxhbmNhfGVufDB8fHx8MTcwNTgzNTM4Nnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&quot;,
+        &quot;small&quot;: &quot;https://images.unsplash.com/photo-1581443459255-e895f2a4222f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w1NTQ4Mjl8MHwxfHNlYXJjaHwxfHxjYXNhYmxhbmNhfGVufDB8fHx8MTcwNTgzNTM4Nnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot;,
+        &quot;thumb&quot;: &quot;https://images.unsplash.com/photo-1581443459255-e895f2a4222f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w1NTQ4Mjl8MHwxfHNlYXJjaHwxfHxjYXNhYmxhbmNhfGVufDB8fHx8MTcwNTgzNTM4Nnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=200&quot;,
+        &quot;small_s3&quot;: &quot;https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1581443459255-e895f2a4222f&quot;
+        },
+...
+</code></pre>
+<h2 id="costs">Costs</h2>
+<p>Unsplash API is available at no charge with unlimited usage.</p></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>dx-Dash is licensed under the <a href='https://github.com/awadih/dx-Dash/blob/main/LICENSE.md'>MIT license</a></small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+                <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/languages/yaml.min.js"></script>
+                <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/languages/python.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
